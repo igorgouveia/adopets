@@ -1,0 +1,15 @@
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+
+const routes: Routes = [
+  { path: '', pathMatch: 'full', redirectTo: '/welcome' },
+  { path: 'welcome', loadChildren: () => import('./pages/welcome/welcome.module').then(m => m.WelcomeModule) },
+  { path: 'register', loadChildren: () => import('./pages/register-user/register-user.module').then(m => m.RegisterModule) },
+  { path: 'search', loadChildren: () => import('./pages/search/search.module').then(m => m.SearchModule) }
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }

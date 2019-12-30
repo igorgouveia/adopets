@@ -1,0 +1,19 @@
+<div class="background" align='center' *ngIf='status == 0'>
+    <h1 align='center'>Welcome to the Igor Gouveia test application.</h1>
+    <h3 align='center'>This application is being developed to perform the test, for the position of developer Front End
+        of the company
+        Adopets.
+    </h3>
+    <h3 align='center'>To start our navigation flow you need to make a session request.</h3>
+    <h4 align='center'> Click on the button below.</h4>
+    <div class="button" align='center'>
+        <button nz-button nzType="primary" nzSize='large' (click)='request()' nzShape="round">
+            Resquest Session
+        </button>
+    </div>
+</div>
+<ng-container *ngIf='status == 1'>
+        <nz-result nzStatus="success" nzTitle="Successfully Request Session"
+            nzSubTitle="Now you can make your login.">
+        </nz-result>
+    </ng-container>

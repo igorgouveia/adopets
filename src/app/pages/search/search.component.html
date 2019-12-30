@@ -1,0 +1,76 @@
+<ng-container *ngIf='status == 1'>
+  <nz-spin nzTip="Loading..." nzSize='large' *ngIf='loading' class="loading">
+  </nz-spin>
+  <ng-container *ngIf='!loading' class="background">
+    <div class="buttons" align='right'>
+      <button nz-button nz-dropdown [nzDropdownMenu]="sex">Sex</button>
+      <nz-dropdown-menu #sex="nzDropdownMenu">
+        <ul nz-menu>
+          <li nz-menu-item (click)="setSex('')">All</li>
+          <li nz-menu-item (click)="setSex('FEMALE')">Female</li>
+          <li nz-menu-item (click)="setSex('MALE')">Male</li>
+        </ul>
+      </nz-dropdown-menu>
+      <button nz-button nz-dropdown nzType="default" [nzDropdownMenu]="age">Age</button>
+      <nz-dropdown-menu #age="nzDropdownMenu">
+        <ul nz-menu>
+          <li nz-menu-item (click)="setAge('')">All</li>
+          <li nz-menu-item (click)="setAge('BABY')">Baby</li>
+          <li nz-menu-item (click)="setAge('YOUNG')">Young</li>
+          <li nz-menu-item (click)="setAge('ADULT')">Adult</li>
+          <li nz-menu-item (click)="setAge('SENIOR')">Senior</li>
+        </ul>
+      </nz-dropdown-menu>
+      <button nz-button nz-dropdown [nzDropdownMenu]="size">Size</button>
+      <nz-dropdown-menu #size="nzDropdownMenu">
+        <ul nz-menu>
+          <li nz-menu-item (click)="setSize('')">All</li>
+          <li nz-menu-item (click)="setSize('S')">S</li>
+          <li nz-menu-item (click)="setSize('M')">M</li>
+          <li nz-menu-item (click)="setSize('L')">L</li>
+          <li nz-menu-item (click)="setSize('XL')">XL</li>
+        </ul>
+      </nz-dropdown-menu>
+      <button nz-button nz-dropdown [nzDropdownMenu]="sort">Sort</button>
+      <nz-dropdown-menu #sort="nzDropdownMenu">
+        <ul nz-menu>
+          <li nz-menu-item (click)="setSort('name')">Alphabetical</li>
+          <li nz-menu-item (click)="setSort('-name')">Alphabetical Desc</li>
+          <li nz-menu-item (click)="setSort('size_key')">Size</li>
+          <li nz-menu-item (click)="setSort('-size_key')">Size Desc</li>
+          <li nz-menu-item (click)="setSort('sex_key')">Sex</li>
+          <li nz-menu-item (click)="setSort('-sex_key')">Sex Desc</li>
+          <li nz-menu-item (click)="setSort('age_key')">Age</li>
+          <li nz-menu-item (click)="setSort('-age_key')">Age Desc</li>
+        </ul>
+      </nz-dropdown-menu>
+      <button nz-button (click)="reset()">Reset</button>
+    </div>
+    <div align='center'>
+      <div class="row" nz-row nzGutter="24">
+        <div *ngFor='let search of result' nz-col class="gutter-row" nzSpan="8">
+          <nz-card style="width:300px;" [nzCover]="coverTemplate" [nzExtra]="actionSetting">
+            <nz-card-meta [nzTitle]="search.name ">
+            </nz-card-meta>
+          </nz-card>
+          <ng-template #coverTemplate>
+            <img alt="example" height="300px" width="200px" src="../../../assets/{{search.sex_key}}.png" />
+          </ng-template>
+          <ng-template #actionSetting>
+            {{search.status_key}} - R$ {{search.price}}
+          </ng-template>
+        </div>
+      </div>
+    </div>
+    <div class="pagination" align='center'>
+      <nz-pagination [nzPageIndex]="page" [nzPageSize]='limit' (nzPageIndexChange)='setPage($event)' [nzTotal]="length">
+      </nz-pagination>
+    </div>
+
+  </ng-container>
+</ng-container>
+<ng-container *ngIf='status == 0'>
+  <nz-result nzTitle="Permission Denied" nzStatus="error"
+    nzSubTitle="You do not have a registered session to use this page.">
+  </nz-result>
+</ng-container>

@@ -1,0 +1,28 @@
+<div class="form" *ngIf='status !== 1 &&  status !== 3'>
+    <h1 align='center'>Session Register</h1>
+    <h4 align='center'>Enter your login credentials to register your session</h4>
+    <label>Email</label>
+    <input nz-input placeholder="Your E-mail" [(ngModel)]="email" />
+    <label>Password</label>
+    <input [type]="'password'" nz-input placeholder="Your Password" [(ngModel)]="password" />
+    <div class="button" align='center'>
+        <button nz-button nzType="primary" (click)='submit()' nzShape="round">
+            Register
+        </button>
+    </div>
+</div>
+<ng-container *ngIf='status == 1'>
+    <nz-result nzStatus="success" nzTitle="Successfully Register Session"
+        nzSubTitle="Now you can enjoy all the functions of the application.">
+    </nz-result>
+</ng-container>
+<ng-container *ngIf='status == 0'>
+    <nz-result nzTitle="Register Failed" nzStatus="error"
+        nzSubTitle="Please check and modify your credentials before resubmitting.">
+    </nz-result>
+</ng-container>
+<ng-container *ngIf='status == 3'>
+    <nz-result nzTitle="Permission Denied" nzStatus="error"
+        nzSubTitle="You do not have a request session to use this page.">
+    </nz-result>
+</ng-container>

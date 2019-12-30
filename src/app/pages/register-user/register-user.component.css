@@ -1,0 +1,11 @@
+.form{
+    width: 30%;
+    margin: 0 auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px 0 rgba(69, 91, 99, 0.08);
+    background-color: #ffffff;
+    padding: 5% 5% 5% 5%;
+}
+.button{
+  margin-top: 5%;
+}
